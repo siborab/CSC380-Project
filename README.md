@@ -3,6 +3,6 @@
 Project Description: Design an encryption and decryption algorithm using Substitution Ciphers based on Ceasar cipher using any key number. Create a simple UI - extra points for aesthetics.
 Due Date: 12/12/25
 
-Sibora and Arsenii will work on backend 
+Backend: Sibora, Arsenii
 
-Qaasid and Anas will work on frontend
+Frontend: Qaasid, Anas
