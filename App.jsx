@@ -18,11 +18,11 @@ function App() {
     try {
       // TODO: Anas will add the actual backend API call here
       // Example:
-      // const response = await fetch('/api/process', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ input })
-      // });
+      const response = await fetch('/api/caesar-cipher', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: input, shift: 3 })
+      });
       // const data = await response.json();
       
       // Simulated API call for now
