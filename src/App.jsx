@@ -19,8 +19,9 @@ function App() {
     setError(null);
 
     try {
+      // BODY depends on endpoint
       const body =
-        endpoint === "/api/bruteforce"
+        endpoint === "/api/bruteforce" || endpoint === "/api/analyze"
           ? { text: inputValue }
           : { text: inputValue, shift: keyValue || 0 };
 
@@ -36,15 +37,27 @@ function App() {
         throw new Error(data.error || "Server error");
       }
 
+      // 🔹 OUTPUT HANDLING
       if (endpoint === "/api/encrypt") {
         setOutputData(data.encryptedText);
-      } else if (endpoint === "/api/decrypt") {
+      } 
+      else if (endpoint === "/api/decrypt") {
         setOutputData(data.decryptedText);
-      } else if (endpoint === "/api/bruteforce") {
+      } 
+      else if (endpoint === "/api/bruteforce") {
         const formatted = data.possibleDecryptions
           .map((item) => `Shift ${item.shift}: ${item.decrypted}`)
           .join("\n");
         setOutputData(formatted);
+      } 
+      else if (endpoint === "/api/analyze") {
+        const formatted = Object.entries(data.analysis.percentages)
+          .map(([char, pct]) => `${char}: ${pct}%`)
+          .join("\n");
+
+        setOutputData(
+          `Frequency Analysis\n\n${formatted}\n\nTotal Letters: ${data.analysis.totalLetters}`
+        );
       }
     } catch (err) {
       console.error(err);
@@ -69,6 +82,7 @@ function App() {
         onEncrypt={() => performCipher("/api/encrypt")}
         onDecrypt={() => performCipher("/api/decrypt")}
         onBruteForce={() => performCipher("/api/bruteforce")}
+        onAnalyze={() => performCipher("/api/analyze")} 
       />
     </div>
   );

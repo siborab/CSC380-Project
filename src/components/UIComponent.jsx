@@ -11,7 +11,8 @@ const UIComponent = ({
   error,
   onEncrypt,
   onDecrypt,
-  onBruteForce, // 🔹 NEW PROP
+  onBruteForce,
+  onAnalyze, 
 }) => {
 
   return (
@@ -75,7 +76,6 @@ const UIComponent = ({
                 Decrypt
               </button>
 
-              {/* 🔹 NEW BRUTE FORCE BUTTON */}
               <button
                 type="button"
                 className="attack-btn"
@@ -83,6 +83,16 @@ const UIComponent = ({
                 disabled={isLoading || !inputValue.trim()}
               >
                 Brute Force Attack
+              </button>
+
+              
+              <button
+                type="button"
+                className="attack-btn"
+                onClick={onAnalyze}
+                disabled={isLoading || !inputValue.trim()}
+              >
+                Frequency Analysis
               </button>
             </div>
           </form>
@@ -92,7 +102,6 @@ const UIComponent = ({
         <section className="output-section">
           <h2>Output</h2>
 
-          {/* Error */}
           {error && (
             <div className="error-message">
               <span className="error-icon">⚠️</span>
@@ -100,7 +109,6 @@ const UIComponent = ({
             </div>
           )}
 
-          {/* Loading */}
           {isLoading && (
             <div className="loading-container">
               <div className="loading-spinner"></div>
@@ -108,7 +116,6 @@ const UIComponent = ({
             </div>
           )}
 
-          {/* Output */}
           {outputData && !isLoading && (
             <div className="output-container">
               <div className="output-content">
@@ -124,12 +131,11 @@ const UIComponent = ({
             </div>
           )}
 
-          {/* Empty State */}
           {!outputData && !isLoading && !error && (
             <div className="empty-output">
               <p>
                 No output yet. Enter a message and key, then click Encrypt,
-                Decrypt, or Brute Force Attack.
+                Decrypt, Brute Force Attack, or Frequency Analysis.
               </p>
             </div>
           )}
@@ -140,4 +146,3 @@ const UIComponent = ({
 };
 
 export default UIComponent;
-
